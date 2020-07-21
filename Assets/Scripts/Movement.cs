@@ -1,97 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
     public enum MovementMethod
-    { speed, teleport, Gravity }
+    { speed, teleport }
     public MovementMethod SelectedMovement;
 
     public Rigidbody rb;
 
-    public float Speed = 100f;
-    public float Teleport = 50f;
-    public float Gravity = 9.81f;
-    private void FixedUpdate()
+    public float MoveDistance = 1f;
+    public float TimeDif = 0;
+
+    Vector3 Direction;
+    private void Update()
     {
+        TimeDif += Time.deltaTime;
 
-        switch (SelectedMovement)
+        if (Input.GetKey("w"))
         {
-            case MovementMethod.Gravity:
-                #region gravity
-
-                if (Input.GetKey("w"))
-                {
-                    Physics.gravity = new Vector3(0, Gravity, 0);
-                }
-                else if (Input.GetKey("a"))
-                {
-                    Physics.gravity = new Vector3(-Gravity, 0, 0);
-                }
-                else if (Input.GetKey("s"))
-                {
-                    Physics.gravity = new Vector3(0, -Gravity, 0);
-                }
-                else if (Input.GetKey("d"))
-                {
-                    Physics.gravity = new Vector3(Gravity, 0, 0);
-                }
-                else
-                { Physics.gravity = Vector3.zero; }
-
-                System.Console.WriteLine(Physics.gravity);
-                #endregion
-                break;
-
-            case MovementMethod.speed:
-                #region speed
-                float NewSpeed = Speed * Time.deltaTime;
-                if (Input.GetKey("w"))
-                {
-                    rb.AddForce(new Vector3(0, NewSpeed), ForceMode.VelocityChange);
-                }
-                if (Input.GetKey("a"))
-                {
-                    rb.AddForce(new Vector3(-NewSpeed, 0), ForceMode.VelocityChange);
-                }
-                if (Input.GetKey("s"))
-                {
-                    rb.AddForce(new Vector3(0, -NewSpeed), ForceMode.VelocityChange);
-                }
-                if (Input.GetKey("d"))
-                {
-                    Physics.gravity = new Vector3();
-                    rb.AddForce(new Vector3(NewSpeed, 0), ForceMode.VelocityChange);
-                }
-                #endregion
-                break;
-
-            case MovementMethod.teleport:
-                #region teleport
-                float x = this.transform.position.x;
-                float y = this.transform.position.y;
-                float z = this.transform.position.z;
-                float NewDistance = Teleport * Time.deltaTime;
-                if (Input.GetKey("w"))
-                {
-                    this.transform.position = new Vector3(x, y + NewDistance, z);
-                }
-                if (Input.GetKey("a"))
-                {
-                    this.transform.position = new Vector3(x - NewDistance, y, z);
-                }
-                if (Input.GetKey("s"))
-                {
-                    this.transform.position = new Vector3(x, y - NewDistance, z);
-                }
-                if (Input.GetKey("d"))
-                {
-                    this.transform.position = new Vector3(x + NewDistance, y, z);
-                }
-                #endregion
-                break;
+            Direction = new Vector3();
+            Direction.y += MoveDistance;
         }
+        if (Input.GetKey("a"))
+        {
+            Direction = new Vector3();
+            Direction.x -= MoveDistance;
+        }
+        if (Input.GetKey("s"))
+        {
+            Direction = new Vector3();
+            Direction.y -= MoveDistance;
+        }
+        if (Input.GetKey("d"))
+        {
+            Direction = new Vector3();
+            Direction.x += MoveDistance;
+        }
+
+        if (TimeDif < 0.1) return;
+        TimeDif = 0;
+
+        if (OnPointGain.TailUnits.Count > 0)
+        { MoveLastTailUnit(); }
+
+        this.transform.position += Direction;
+    }
+    void MoveLastTailUnit()
+    {
+        OnPointGain.TailUnits.Last().transform.position = this.transform.position;
+        OnPointGain.TailUnits.Insert( 0, OnPointGain.TailUnits.Last() );
+
+        var temp = OnPointGain.TailUnits[OnPointGain.TailUnits.Count - 1];
+        OnPointGain.TailUnits.RemoveAt(OnPointGain.TailUnits.Count - 1);
+        Destroy(temp);
     }
 }

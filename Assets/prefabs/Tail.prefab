@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2414216723334118811}
   - component: {fileID: 2414216723334118790}
   - component: {fileID: 2414216723334118810}
-  - component: {fileID: 2414216723334118809}
+  - component: {fileID: 4007528521707558081}
   m_Layer: 0
   m_Name: Tail
   m_TagString: Tail
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2414216723334118808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0926338, y: -0.7166447, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,26 +113,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!145 &2414216723334118809
-SpringJoint:
+--- !u!114 &4007528521707558081
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2414216723334118808}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_Spring: 3e+30
-  m_Damper: 0
-  m_MinDistance: 0
-  m_MaxDistance: 0.71
-  m_Tolerance: 1.00000005e-20
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fff5ceb514b354587761234f6db1a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TailObject: {fileID: 2414216723334118808}
+  ThisObj: {fileID: 2414216723334118808}
