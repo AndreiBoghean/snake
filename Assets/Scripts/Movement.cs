@@ -6,16 +6,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public enum MovementMethod
-    { speed, teleport }
-    public MovementMethod SelectedMovement;
-
-    public Rigidbody rb;
-
     public float MoveDistance = 1f;
     public float TimeDif = 0;
 
     Vector3 Direction;
+
     private void Update()
     {
         TimeDif += Time.deltaTime;
@@ -51,11 +46,11 @@ public class Movement : MonoBehaviour
     }
     void MoveLastTailUnit()
     {
+        if (OnPointGain.TailUnits == null) return;
         OnPointGain.TailUnits.Last().transform.position = this.transform.position;
-        OnPointGain.TailUnits.Insert( 0, OnPointGain.TailUnits.Last() );
 
-        var temp = OnPointGain.TailUnits[OnPointGain.TailUnits.Count - 1];
+        OnPointGain.TailUnits.Insert(0, OnPointGain.TailUnits.Last());
+
         OnPointGain.TailUnits.RemoveAt(OnPointGain.TailUnits.Count - 1);
-        Destroy(temp);
     }
 }

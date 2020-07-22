@@ -264,6 +264,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2414216723334118789, guid: a0b4954c6b72b03489e2266e61a74cac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414216723334118789, guid: a0b4954c6b72b03489e2266e61a74cac, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2414216723334118808, guid: a0b4954c6b72b03489e2266e61a74cac, type: 3}
       propertyPath: m_Name
       value: Tail
@@ -403,8 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bba50013739d443acc5145ad828d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedMovement: 1
-  rb: {fileID: 538347985}
   MoveDistance: 1
   TimeDif: 0
 --- !u!65 &538347987
@@ -478,7 +484,7 @@ Transform:
   m_GameObject: {fileID: 538347984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -568,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6192236671249208837, guid: 4f806a430b7c5d34f997644eafdc1670, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6192236671249208837, guid: 4f806a430b7c5d34f997644eafdc1670, type: 3}
       propertyPath: m_LocalScale.z

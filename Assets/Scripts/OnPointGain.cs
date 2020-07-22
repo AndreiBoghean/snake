@@ -8,22 +8,27 @@ using UnityEngine.UI;
 
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
+using UnityEngine.SceneManagement;
 
 public class OnPointGain : MonoBehaviour
 {
     public Object TailObject;
     public static List<GameObject> TailUnits = new List<GameObject>();
-    
-
-    //public GameObject ThisObj;
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.name == "Player")
         {
-            var ThisObj = (GameObject)Instantiate(TailObject, new Vector3( Random.Range(-16, 17) , Random.Range(-10, 11) ), new Quaternion());
+            if (TailUnits.Contains(this.gameObject))
+            {
+                SceneManager.LoadScene("SampleScene"); return;
+            }
+            else
+            {
+                TailUnits.Add(this.gameObject);
+                Instantiate(TailObject, new Vector3(Random.Range(-16, 17), Random.Range(-9, 10)), new Quaternion());
+            }
 
-            TailUnits.Add(ThisObj);
         }
     }
 }
