@@ -9,6 +9,6 @@ namespace Assets.Scripts
     public static class GameLost
     {
         public static void Lost()
-        { UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene"); return; }
+        { UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene"); return; }
     }
 }

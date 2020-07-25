@@ -45,15 +45,13 @@ public class Movement : MonoBehaviour
         TimeDif = 0;
 
         if (TailUnits.Count > 0)
-        { MoveLastTailUnit();  }
+        { MoveLastTailUnit(); }
 
         this.transform.position += Direction;
     }
     void MoveLastTailUnit()
     {
         TailUnits.Last().transform.position = this.transform.position;
-
-        TailUnits.Last().GetComponent<Collider>().enabled = true;
 
         TailUnits.Insert(0, TailUnits.Last());
 
