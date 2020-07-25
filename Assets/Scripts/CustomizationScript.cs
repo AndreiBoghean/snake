@@ -1,76 +1,89 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Windows.Media;
+﻿using System.Globalization;
 using TMPro;
 using UnityEngine;
-using Color = System.Windows.Media.Color;
 
+using Color = UnityEngine.Color;
 public class CustomizationScript : MonoBehaviour
 {
     public TMP_InputField SnakeHeadInput;
     public Material SnakeHeadMat;
-    public string SnakeHeadDefault;
+    public Color SnakeHeadDefault;
     
     public TMP_InputField SnakeBodyInput;
     public Material SnakeBodyMat;
-    public string SnakeBodyDefault;
+    public Color SnakeBodyDefault;
 
     public TMP_InputField BorderInput;
     public Material BorderMat;
-    public string BorderDefault;
+    public Color BorderDefault;
 
     public TMP_InputField BackgroundInput;
     public Material BackgroundMat;
-    public string BackgroundDefault;
+    public Color BackgroundDefault;
+    public Camera BackgroundCamera;
 
 #region  snake head
     public void UpdateSnakeHead()
     {
-        Update(SnakeHeadInput.text, SnakeHeadMat);
+        UpdateMat(SnakeHeadInput.text, SnakeHeadMat);
     }
 
     public void DefaultSnakeHead()
     {
-        Update(SnakeHeadDefault, SnakeHeadMat);
+        UpdateMat(SnakeHeadDefault, SnakeHeadMat);
     }
 #endregion
 #region  snake body
     public void UpdateSnakeBody()
     {
-        Update(SnakeBodyInput.text, SnakeBodyMat);
+        UpdateMat(SnakeBodyInput.text, SnakeBodyMat);
     }
 
     public void DefaultSnakeBody()
     {
-        Update(SnakeBodyDefault, SnakeBodyMat);
+        UpdateMat(SnakeBodyDefault, SnakeBodyMat);
     }
 #endregion
 #region  border
     public void UpdateBorder()
     {
-        Update(BorderInput.text, BorderMat);
+        UpdateMat(BorderInput.text, BorderMat);
     }
 
     public void DefaultBorder()
     {
-        Update(BorderDefault, SnakeBodyMat);
+        UpdateMat(BorderDefault, BorderMat);
     }
 #endregion
 #region  background
     public void UpdateBackground()
     {
-        Update(BackgroundInput.text, SnakeBodyMat);
+        BackgroundCamera.backgroundColor = GetColFromHex(BackgroundInput.text);
     }
 
     public void DefaultBackground()
     {
-        Update(BackgroundDefault, SnakeBodyMat);
+        BackgroundCamera.backgroundColor = BackgroundDefault;
     }
     #endregion
 
-    private void Update(string Hex, Material Mat)
+    private void UpdateMat(dynamic col, Material Mat)
     {
-        Color temp = (Color)ColorConverter.ConvertFromString(Hex);
-        Mat.color = new UnityEngine.Color(temp.R, temp.G, temp.B, temp.A);
+        if (col is string)
+        { Mat.color = GetColFromHex(col); }
+        else if (col is Color)
+        { Mat.color = col; }
+    }
+
+    public static Color GetColFromHex(string Hex)
+    {
+        Hex.Replace("#", "");
+        int r, g, b;
+
+        r = int.Parse(Hex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+        g = int.Parse(Hex.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+        b = int.Parse(Hex.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+
+       return new Color(r, g, b);
     }
 }

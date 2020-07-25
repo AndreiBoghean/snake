@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour
 {
     public static void Play()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
+    { SceneManager.LoadScene("GameScene"); }
+
+    public static void Customisation()
+    { SceneManager.LoadScene("CustomisationScene"); }
 }

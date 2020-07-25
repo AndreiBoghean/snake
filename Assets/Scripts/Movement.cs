@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour
             Direction.x += MoveDistance;
         }
 
-        if (TimeDif < 0.1) return;
+        if (TimeDif < 1) return;
         TimeDif = 0;
 
         if (TailUnits.Count > 0)
